@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Quest — 3D Game Budget Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="arena-bg">
+    <div class="grid-layer"></div>
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="coin coin-1">₹</div>
+    <div class="coin coin-2">₹</div>
+    <div class="coin coin-3">₹</div>
+  </div>
+
+  <div id="confettiLayer" class="confetti-layer"></div>
+
+  <div class="app">
+    <aside class="sidebar panel-3d">
+      <div class="logo-wrap">
+        <div class="logo-cube">
+          <span>₹</span>
+        </div>
+        <div>
+          <h1>Money Quest</h1>
+          <p>Budget like a mini game</p>
+        </div>
+      </div>
+
+      <div class="player-card">
+        <div class="avatar" id="playerAvatar">MQ</div>
+        <div>
+          <p class="tiny">Current level</p>
+          <h2 id="currentLevelName">Money Baby</h2>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-screen="dashboard">Dashboard</button>
+        <button class="nav-btn" data-screen="log">Daily Log</button>
+        <button class="nav-btn" data-screen="quests">Quests</button>
+        <button class="nav-btn" data-screen="monsters">Spend Monsters</button>
+        <button class="nav-btn" data-screen="badges">Badges</button>
+        <button class="nav-btn" data-screen="settings">Salary & Budget</button>
+      </nav>
+
+      <div class="salary-chip">
+        <p>Gross salary</p>
+        <strong>₹60,000</strong>
+        <span>In-hand after 10% deduction: ₹54,000</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">3D Game-Style Tracker</p>
+          <h2>Turn daily spending into levels, XP, badges and boss fights</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="btn ghost">Load sample</button>
+          <button id="exportBtn" class="btn ghost">Export save file</button>
+          <label class="btn ghost">
+            Import save file
+            <input id="importInput" type="file" accept="application/json" hidden />
+          </label>
+          <button id="resetBtn" class="btn danger">Reset</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="screen active-screen">
+        <div class="hero panel-3d">
+          <div class="hero-text">
+            <p class="eyebrow">Player status</p>
+            <h3 id="heroTitle">Welcome back, budget player</h3>
+            <p id="heroSubtitle">Log today's money moves and collect XP.</p>
+            <div class="xp-box">
+              <div class="xp-row">
+                <span id="levelName">Level 1 · Money Baby</span>
+                <span id="xpText">0 / 100 XP</span>
+              </div>
+              <div class="xp-track">
+                <div id="xpFill" class="xp-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="treasure-chest">
+              <div class="chest-lid"></div>
+              <div class="chest-body"></div>
+              <div class="chest-lock">₹</div>
+            </div>
+            <div class="floating-score">
+              <span>Survival Score</span>
+              <strong id="survivalScore">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="stat-card panel-3d">
+            <p>In-hand Salary</p>
+            <h3 id="netSalaryCard">₹54,000</h3>
+            <span>After 10% deduction</span>
+          </article>
+          <article class="stat-card panel-3d">
+            <p>This Month Spent</p>
+            <h3 id="spentCard">₹0</h3>
+            <span id="spentSub">Daily log expenses</span>
+          </article>
+          <article class="stat-card panel-3d">
+            <p>Money Left</p>
+            <h3 id="leftCard">₹0</h3>
+            <span>Salary minus expenses</span>
+          </article>
+          <article class="stat-card panel-3d">
+            <p>Daily Streak</p>
+            <h3 id="streakCard">0 days</h3>
+            <span>Consecutive logging days</span>
+          </article>
+        </div>
+
+        <div class="grid-2">
+          <article class="panel-3d chart-card">
+            <div class="panel-head">
+              <h3>7-day XP map</h3>
+              <p>Daily spending and logging activity</p>
+            </div>
+            <div id="dailyBars" class="bar-chart"></div>
+          </article>
+
+          <article class="panel-3d chart-card">
+            <div class="panel-head">
+              <h3>Budget power bars</h3>
+              <p>Your salary allocation status</p>
+            </div>
+            <div id="budgetBars" class="power-bars"></div>
+          </article>
+        </div>
+
+        <div class="grid-2">
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Smart game insights</h3>
+              <p>What the tracker notices</p>
+            </div>
+            <div id="insights" class="insight-list"></div>
+          </article>
+
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Quick add</h3>
+              <p>Common Mumbai/Thane spends</p>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-title="Zomato" data-category="Food" data-amount="350">Zomato ₹350</button>
+              <button class="quick-btn" data-title="Zepto" data-category="Groceries" data-amount="500">Zepto ₹500</button>
+              <button class="quick-btn" data-title="Blinkit" data-category="Groceries" data-amount="400">Blinkit ₹400</button>
+              <button class="quick-btn" data-title="Cab / Metro" data-category="Transport" data-amount="250">Transport ₹250</button>
+              <button class="quick-btn" data-title="Office snack" data-category="Food" data-amount="80">Snack ₹80</button>
+              <button class="quick-btn" data-title="Coffee" data-category="Food" data-amount="180">Coffee ₹180</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="log" class="screen">
+        <div class="grid-2 log-grid">
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Add money move</h3>
+              <p>Every entry gives XP</p>
+            </div>
+
+            <form id="entryForm" class="form">
+              <label>
+                <span>Date</span>
+                <input id="entryDate" type="date" required />
+              </label>
+
+              <label>
+                <span>Move type</span>
+                <select id="entryType" required>
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                  <option value="saving">Saving</option>
+                </select>
+              </label>
+
+              <label>
+                <span>Category</span>
+                <select id="entryCategory" required></select>
+              </label>
+
+              <label>
+                <span>Amount</span>
+                <input id="entryAmount" type="number" min="1" step="0.01" placeholder="Example: 350" required />
+              </label>
+
+              <label>
+                <span>Title / Merchant</span>
+                <input id="entryTitle" type="text" placeholder="Example: Zomato dinner" required />
+              </label>
+
+              <label>
+                <span>Spend mood</span>
+                <select id="entryMood">
+                  <option value="Necessary">Necessary</option>
+                  <option value="Worth it">Worth it</option>
+                  <option value="Impulse">Impulse</option>
+                  <option value="Regret">Regret</option>
+                  <option value="Smart">Smart</option>
+                </select>
+              </label>
+
+              <label class="full">
+                <span>Note</span>
+                <textarea id="entryNote" rows="3" placeholder="Optional"></textarea>
+              </label>
+
+              <button class="btn primary full" type="submit">Add move and gain XP</button>
+            </form>
+          </article>
+
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Recent moves</h3>
+              <p>Your latest entries</p>
+            </div>
+            <div id="recentList" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="quests" class="screen">
+        <div class="panel-3d">
+          <div class="panel-head">
+            <h3>Weekly challenges</h3>
+            <p>Complete quests to gain bonus XP</p>
+          </div>
+          <div id="questsGrid" class="quest-grid"></div>
+        </div>
+      </section>
+
+      <section id="monsters" class="screen">
+        <div class="panel-3d">
+          <div class="panel-head">
+            <h3>Spend monsters</h3>
+            <p>Overspending categories become monsters. Keep them small.</p>
+          </div>
+          <div id="monsterGrid" class="monster-grid"></div>
+        </div>
+      </section>
+
+      <section id="badges" class="screen">
+        <div class="panel-3d">
+          <div class="panel-head">
+            <h3>Badge room</h3>
+            <p>Unlock achievements from your daily behavior</p>
+          </div>
+          <div id="badgeGrid" class="badge-grid"></div>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="grid-2">
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Salary settings</h3>
+              <p>Default set as ₹60,000 gross and 10% deduction</p>
+            </div>
+            <form id="settingsForm" class="form">
+              <label>
+                <span>Gross salary</span>
+                <input id="grossSalary" type="number" min="0" step="1" />
+              </label>
+              <label>
+                <span>Deduction percentage</span>
+                <input id="deductionPercent" type="number" min="0" max="100" step="1" />
+              </label>
+              <label>
+                <span>Monthly food budget</span>
+                <input id="foodBudget" type="number" min="0" step="1" />
+              </label>
+              <label>
+                <span>Shopping budget</span>
+                <input id="shoppingBudget" type="number" min="0" step="1" />
+              </label>
+              <label>
+                <span>Transport budget</span>
+                <input id="transportBudget" type="number" min="0" step="1" />
+              </label>
+              <label>
+                <span>Groceries budget</span>
+                <input id="groceriesBudget" type="number" min="0" step="1" />
+              </label>
+              <button class="btn primary full" type="submit">Save settings</button>
+            </form>
+          </article>
+
+          <article class="panel-3d">
+            <div class="panel-head">
+              <h3>Default fixed setup</h3>
+              <p>Based on your current living costs</p>
+            </div>
+            <div class="fixed-list">
+              <div><span>Rent</span><strong>₹23,000</strong></div>
+              <div><span>Mom contribution</span><strong>₹10,000</strong></div>
+              <div><span>Electricity estimate</span><strong>₹5,000</strong></div>
+              <div><span>Transport estimate</span><strong>₹5,000</strong></div>
+              <div><span>Appliances rental</span><strong>₹2,000</strong></div>
+              <div><span>WiFi</span><strong>₹500</strong></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
