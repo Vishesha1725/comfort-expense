@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comfort Daily Log</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar card-3d glass">
+      <div class="brand">
+        <div class="brand-badge"></div>
+        <div>
+          <h1>Comfort Daily Log</h1>
+          <p>Track daily spending in a fun way</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-target="dashboardSection">Dashboard</button>
+        <button class="nav-btn" data-target="addEntrySection">Add Entry</button>
+        <button class="nav-btn" data-target="insightsSection">Insights</button>
+        <button class="nav-btn" data-target="historySection">History</button>
+        <button class="nav-btn" data-target="settingsSection">Budget</button>
+      </nav>
+
+      <div class="sidebar-mini glass-soft">
+        <h3>How it works</h3>
+        <ul>
+          <li>Add daily expenses or income</li>
+          <li>See trends and category mix</li>
+          <li>Get smart weekly insights</li>
+          <li>Everything stays in your browser</li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Your personal money playground</p>
+          <h2>Make budgeting feel less boring</h2>
+        </div>
+        <div class="top-actions">
+          <button id="seedDataBtn" class="btn secondary">Load sample data</button>
+          <button id="exportBtn" class="btn secondary">Export backup</button>
+          <label class="btn secondary file-btn">
+            Import backup
+            <input id="importInput" type="file" accept="application/json" hidden>
+          </label>
+          <button id="clearBtn" class="btn danger">Clear data</button>
+        </div>
+      </header>
+
+      <section id="dashboardSection" class="section">
+        <div class="hero-panel glass card-3d animated-float">
+          <div>
+            <p class="eyebrow">Daily comfort dashboard</p>
+            <h3>Know where your money is going every single day</h3>
+            <p class="muted">Track your needs, comfort spends, income, and savings with colorful visuals and clear takeaways.</p>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-ring">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="46"></circle>
+                <circle id="comfortRing" class="progress" cx="60" cy="60" r="46"></circle>
+              </svg>
+              <div>
+                <strong id="comfortScore">0</strong>
+                <span>Comfort score</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards-grid">
+          <article class="stat-card glass card-3d pop-in">
+            <p>Monthly Income</p>
+            <h3 id="incomeTotal">₹0</h3>
+            <span>All credits this month</span>
+          </article>
+          <article class="stat-card glass card-3d pop-in delay-1">
+            <p>Monthly Spend</p>
+            <h3 id="expenseTotal">₹0</h3>
+            <span>All debits this month</span>
+          </article>
+          <article class="stat-card glass card-3d pop-in delay-2">
+            <p>Money Left</p>
+            <h3 id="netTotal">₹0</h3>
+            <span>Income minus expense</span>
+          </article>
+          <article class="stat-card glass card-3d pop-in delay-3">
+            <p>Current Streak</p>
+            <h3 id="streakValue">0 days</h3>
+            <span>Days you logged money</span>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Daily trend</h3>
+              <p>Last 7 days of spending</p>
+            </div>
+            <canvas id="trendChart"></canvas>
+          </article>
+
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Category split</h3>
+              <p>Where your money goes</p>
+            </div>
+            <canvas id="categoryChart"></canvas>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Today snapshot</h3>
+              <p>Quick look at today's log</p>
+            </div>
+            <div id="todaySnapshot" class="snapshot-grid"></div>
+          </article>
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Smart takeaways</h3>
+              <p>Simple and useful</p>
+            </div>
+            <div id="dashboardInsights" class="insight-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="addEntrySection" class="section hidden">
+        <div class="section-layout">
+          <article class="panel glass card-3d wide-panel">
+            <div class="panel-head">
+              <h3>Add a daily entry</h3>
+              <p>Track spending or income in seconds</p>
+            </div>
+            <form id="entryForm" class="entry-form">
+              <div class="form-grid">
+                <label>
+                  <span>Date</span>
+                  <input type="date" id="entryDate" required>
+                </label>
+                <label>
+                  <span>Type</span>
+                  <select id="entryType" required>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Category</span>
+                  <select id="entryCategory" required></select>
+                </label>
+                <label>
+                  <span>Amount</span>
+                  <input type="number" id="entryAmount" step="0.01" min="0" placeholder="0.00" required>
+                </label>
+              </div>
+              <div class="form-grid two-col">
+                <label>
+                  <span>Title / Merchant</span>
+                  <input type="text" id="entryTitle" placeholder="Example: Zomato, Rent, Salary" required>
+                </label>
+                <label>
+                  <span>How did this spend feel?</span>
+                  <select id="entryMood">
+                    <option value="Calm">Calm</option>
+                    <option value="Worth it">Worth it</option>
+                    <option value="Impulse">Impulse</option>
+                    <option value="Necessary">Necessary</option>
+                    <option value="Annoying">Annoying</option>
+                  </select>
+                </label>
+              </div>
+              <label>
+                <span>Note</span>
+                <textarea id="entryNote" rows="3" placeholder="Optional note"></textarea>
+              </label>
+              <div class="form-actions">
+                <button type="submit" class="btn primary">Add entry</button>
+                <button type="button" id="quickExpenseBtn" class="btn secondary">Quick add today expense</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Quick vibes</h3>
+              <p>Small fun extras</p>
+            </div>
+            <div class="fun-box">
+              <div class="mood-meter">
+                <div id="moodFill"></div>
+              </div>
+              <p id="moodSummary" class="muted">Start logging to see your money mood.</p>
+            </div>
+            <div class="tip-box glass-soft">
+              <h4>Micro challenge</h4>
+              <p id="challengeText">Try a no-random-spend day today.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="insightsSection" class="section hidden">
+        <div class="section-layout single-col">
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Insight board</h3>
+              <p>Actionable patterns from your daily logs</p>
+            </div>
+            <div id="insightBoard" class="insight-board"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="historySection" class="section hidden">
+        <article class="panel glass card-3d">
+          <div class="panel-head history-head">
+            <div>
+              <h3>History</h3>
+              <p>Filter and review your entries</p>
+            </div>
+            <div class="history-filters">
+              <input id="searchInput" type="text" placeholder="Search title or note">
+              <select id="filterType">
+                <option value="all">All types</option>
+                <option value="expense">Expenses</option>
+                <option value="income">Income</option>
+              </select>
+              <select id="filterCategory">
+                <option value="all">All categories</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Mood</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="settingsSection" class="section hidden">
+        <div class="section-layout">
+          <article class="panel glass card-3d wide-panel">
+            <div class="panel-head">
+              <h3>Monthly budget setup</h3>
+              <p>Set realistic limits for your comfort life</p>
+            </div>
+            <form id="budgetForm" class="entry-form">
+              <div class="form-grid">
+                <label><span>Monthly Income</span><input type="number" id="budgetIncome" min="0" step="0.01"></label>
+                <label><span>Rent</span><input type="number" id="budgetRent" min="0" step="0.01"></label>
+                <label><span>Mom Contribution</span><input type="number" id="budgetMom" min="0" step="0.01"></label>
+                <label><span>Transport</span><input type="number" id="budgetTransport" min="0" step="0.01"></label>
+                <label><span>Electricity</span><input type="number" id="budgetElectricity" min="0" step="0.01"></label>
+                <label><span>WiFi</span><input type="number" id="budgetWifi" min="0" step="0.01"></label>
+                <label><span>Appliances Rental</span><input type="number" id="budgetAppliances" min="0" step="0.01"></label>
+                <label><span>Comfort Budget</span><input type="number" id="budgetComfort" min="0" step="0.01"></label>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn primary">Save budget</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="panel glass card-3d">
+            <div class="panel-head">
+              <h3>Budget health</h3>
+              <p>How your setup looks</p>
+            </div>
+            <div id="budgetHealth" class="insight-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
