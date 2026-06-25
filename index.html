@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Pet Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <span class="blob blob1"></span>
+    <span class="blob blob2"></span>
+    <span class="blob blob3"></span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar card">
+      <div class="brand">
+        <div class="brand-icon">🐶</div>
+        <div>
+          <h1>Money Pet Room</h1>
+          <p>Your cute finance pup lives here</p>
+        </div>
+      </div>
+
+      <div class="pet-mini-card">
+        <span class="mini-label">Pet status</span>
+        <h2 id="sidebarPetMood">Sleepy</h2>
+        <p id="sidebarPetText">Log today to wake up your finance pup.</p>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-screen="home">Pet Room Home</button>
+        <button class="nav-btn" data-screen="dailyLog">Daily Log</button>
+        <button class="nav-btn" data-screen="savings">Savings Corner</button>
+        <button class="nav-btn" data-screen="petCare">Pet Care</button>
+        <button class="nav-btn" data-screen="insights">Insights</button>
+        <button class="nav-btn" data-screen="settings">Settings</button>
+        <button class="nav-btn" data-screen="history">History</button>
+      </nav>
+
+      <div class="mini-card salary-card">
+        <p>Default salary setup</p>
+        <h3>₹66,000</h3>
+        <span>Gross salary</span>
+        <h3>₹60,000</h3>
+        <span>In-hand salary</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">cute dog pet · moving room · playful finance</p>
+          <h2>Your savings make the room prettier, your overspending makes it messy, and your pup reacts to everything.</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="btn secondary">Load sample</button>
+          <button id="exportBtn" class="btn secondary">Export backup</button>
+          <label class="btn secondary">Import backup
+            <input id="importInput" type="file" accept="application/json" hidden>
+          </label>
+          <button id="clearBtn" class="btn danger">Reset</button>
+        </div>
+      </header>
+
+      <section id="home" class="screen active-screen">
+        <div class="hero-grid">
+          <article class="card room-card">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Money Pet Room</p>
+                <h3 id="roomHeadline">Your room is getting ready</h3>
+                <p id="roomSubline">Save money to decorate the room. Log today to wake the pup.</p>
+              </div>
+              <div class="mood-chip">
+                <span>Room score</span>
+                <strong id="roomScore">0</strong>
+              </div>
+            </div>
+
+            <div id="petRoom" class="pet-room room-calm room-dim">
+              <div id="fairyLights" class="fairy-lights"></div>
+              <div id="celebrationSparkles" class="sparkles"></div>
+              <div class="room-wall"></div>
+              <div class="room-floor"></div>
+              <div id="wallArt" class="wall-art hidden-decor"></div>
+              <div id="calendarCard" class="calendar-card">
+                <span>Today</span>
+                <strong id="calendarDate">1</strong>
+                <small id="calendarMonth">Jan</small>
+              </div>
+              <div id="windowView" class="window-view">
+                <div class="window-sky"></div>
+                <div class="window-cloud wc1"></div>
+                <div class="window-cloud wc2"></div>
+                <div class="window-sun"></div>
+                <div class="window-rain"></div>
+              </div>
+              <div id="ceilingLamp" class="ceiling-lamp">
+                <div class="lamp-cord"></div>
+                <div class="lamp-body"></div>
+                <div class="lamp-glow"></div>
+              </div>
+              <div id="bedArea" class="bed-area">
+                <div class="bed-back"></div>
+                <div class="bed-base"></div>
+                <div class="pillow pillow-a"></div>
+                <div class="pillow pillow-b"></div>
+                <div id="extraCushion" class="extra-cushion hidden-decor"></div>
+              </div>
+              <div class="desk-area">
+                <div class="desk-top"></div>
+                <div class="desk-leg left"></div>
+                <div class="desk-leg right"></div>
+                <div class="laptop"></div>
+                <div class="coffee-mug"></div>
+              </div>
+              <div id="plantPot" class="plant-pot stage-1">
+                <div class="pot"></div>
+                <div class="plant-stem"></div>
+                <div class="leaf leaf1"></div>
+                <div class="leaf leaf2"></div>
+                <div class="leaf leaf3"></div>
+                <div class="leaf leaf4"></div>
+                <div class="leaf leaf5"></div>
+              </div>
+              <div id="savingsJar" class="savings-jar">
+                <div class="jar-cap"></div>
+                <div class="jar-body">
+                  <div id="jarCoinsFill" class="jar-coins-fill"></div>
+                  <div class="jar-glass"></div>
+                </div>
+                <div id="floatingCoins" class="floating-coins"></div>
+              </div>
+              <div id="coinShelf" class="coin-shelf hidden-decor">
+                <div class="shelf-board"></div>
+                <div class="shelf-coin c1">₹</div>
+                <div class="shelf-coin c2">₹</div>
+                <div class="shelf-coin c3">₹</div>
+              </div>
+              <div id="clutterLayer" class="clutter-layer"></div>
+              <div id="toyBasket" class="toy-basket hidden-decor"></div>
+              <div id="petSpeech" class="pet-speech">Hi, I am Mochi.</div>
+              <div id="petCharacter" class="pet-character sleeping">
+                <div class="dog-shadow"></div>
+                <div class="dog-tail"></div>
+                <div class="dog-body"></div>
+                <div class="dog-ear ear-left"></div>
+                <div class="dog-ear ear-right"></div>
+                <div class="dog-head">
+                  <div class="dog-face-patch"></div>
+                  <div class="dog-eye eye-left"></div>
+                  <div class="dog-eye eye-right"></div>
+                  <div class="dog-nose"></div>
+                  <div class="dog-mouth"></div>
+                  <div class="dog-blush blush-left"></div>
+                  <div class="dog-blush blush-right"></div>
+                </div>
+                <div class="dog-leg front-left"></div>
+                <div class="dog-leg front-right"></div>
+                <div class="dog-leg back-left"></div>
+                <div class="dog-leg back-right"></div>
+                <div class="sleep-z z1">z</div>
+                <div class="sleep-z z2">z</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="card side-panel">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Room status</h3>
+                <p>Your money mood summary</p>
+              </div>
+            </div>
+            <div class="status-grid">
+              <div class="status-pill">
+                <span>Money left</span>
+                <strong id="moneyLeftHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Saved</span>
+                <strong id="savedHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Daily safe spend</span>
+                <strong id="safeSpendHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Streak</span>
+                <strong id="streakHero">0 days</strong>
+              </div>
+            </div>
+
+            <div class="section-head small-gap top-margin">
+              <div>
+                <h3>Quick actions</h3>
+                <p>Fast ways to update the room</p>
+              </div>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-type="expense" data-category="Food Delivery" data-title="Zomato" data-amount="350" data-label="Worth it">Zomato ₹350</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Zepto" data-amount="500" data-label="Necessary">Zepto ₹500</button>
+              <button class="quick-btn" data-type="expense" data-category="Transport" data-title="Cab / Metro" data-amount="250" data-label="Necessary">Transport ₹250</button>
+              <button class="quick-btn" data-type="breakfast" data-category="Office Breakfast" data-title="Office coffee" data-amount="90" data-label="Worth it">Coffee ₹90</button>
+              <button class="quick-btn" data-type="saving" data-category="Travel Fund" data-title="Travel fund saving" data-amount="1000" data-label="Smart">Save ₹1000</button>
+              <button class="quick-btn" data-type="expense" data-category="Shopping" data-title="Little treat" data-amount="699" data-label="Impulse">Treat ₹699</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="stats-grid">
+          <article class="card stat-card">
+            <p>In-hand income</p>
+            <h3 id="incomeCard">₹60,000</h3>
+            <span>Editable in settings</span>
+          </article>
+          <article class="card stat-card">
+            <p>Spent this month</p>
+            <h3 id="spentCard">₹0</h3>
+            <span>Expenses + breakfast</span>
+          </article>
+          <article class="card stat-card">
+            <p>Savings this month</p>
+            <h3 id="savedCard">₹0</h3>
+            <span>Goal progress</span>
+          </article>
+          <article class="card stat-card">
+            <p>Food app spend</p>
+            <h3 id="foodAppsCard">₹0</h3>
+            <span>Zomato / Zepto / Blinkit</span>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Unlocked room items</h3>
+                <p>More savings unlock prettier room objects</p>
+              </div>
+            </div>
+            <div id="unlockGrid" class="unlock-grid"></div>
+          </article>
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Today’s activity</h3>
+                <p>What changed the room today</p>
+              </div>
+            </div>
+            <div id="todayEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="dailyLog" class="screen">
+        <div class="two-col form-layout">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Daily log</h3>
+                <p>Add entries and watch Mochi react</p>
+              </div>
+            </div>
+            <form id="entryForm" class="form-grid">
+              <label>
+                <span>Date</span>
+                <input id="entryDate" type="date" required>
+              </label>
+              <label>
+                <span>Type</span>
+                <select id="entryType" required>
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                  <option value="saving">Saving</option>
+                  <option value="breakfast">Breakfast / snack</option>
+                </select>
+              </label>
+              <label>
+                <span>Category</span>
+                <select id="entryCategory" required></select>
+              </label>
+              <label>
+                <span>Amount</span>
+                <input id="entryAmount" type="number" min="0" step="1" placeholder="0" required>
+              </label>
+              <label>
+                <span>Title</span>
+                <input id="entryTitle" type="text" placeholder="Example: Zomato dinner" required>
+              </label>
+              <label>
+                <span>Label</span>
+                <select id="entryLabel">
+                  <option value="Necessary">Necessary</option>
+                  <option value="Worth it">Worth it</option>
+                  <option value="Impulse">Impulse</option>
+                  <option value="Regret">Regret</option>
+                  <option value="Smart">Smart</option>
+                </select>
+              </label>
+              <label class="full-width">
+                <span>Note</span>
+                <textarea id="entryNote" rows="3" placeholder="Optional note"></textarea>
+              </label>
+              <button class="btn primary full-width" type="submit">Update room</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Recent room changes</h3>
+                <p>Latest entries</p>
+              </div>
+            </div>
+            <div id="recentEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="savings" class="screen">
+        <div class="two-col form-layout">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Savings Corner</h3>
+                <p>Fill the jar and unlock room upgrades</p>
+              </div>
+            </div>
+            <div class="savings-showcase">
+              <div class="big-jar-wrap">
+                <div class="big-jar-cap"></div>
+                <div class="big-jar-body">
+                  <div id="bigJarFill" class="big-jar-fill"></div>
+                  <div class="big-jar-glass"></div>
+                </div>
+              </div>
+              <div class="savings-info-grid">
+                <div>
+                  <span>Total saved</span>
+                  <strong id="totalSavedJar">₹0</strong>
+                </div>
+                <div>
+                  <span>Monthly target</span>
+                  <strong id="monthlyTargetJar">₹0</strong>
+                </div>
+                <div>
+                  <span>Room glow</span>
+                  <strong id="roomGlowJar">0%</strong>
+                </div>
+              </div>
+              <div class="meter-track">
+                <div id="savingsMeter" class="meter-fill"></div>
+              </div>
+            </div>
+
+            <form id="goalForm" class="single-form">
+              <label>
+                <span>Goal</span>
+                <select id="goalName"></select>
+              </label>
+              <label>
+                <span>Add saving</span>
+                <input id="goalAmount" type="number" min="1" step="1" placeholder="1000">
+              </label>
+              <button class="btn primary" type="submit">Add saving</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Goal shelf</h3>
+                <p>Each goal unlocks a part of the room</p>
+              </div>
+            </div>
+            <div id="goalGrid" class="goal-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="petCare" class="screen">
+        <div class="two-col form-layout">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Mochi’s care panel</h3>
+                <p>Your finance pup’s mood and energy</p>
+              </div>
+            </div>
+            <div class="pet-care-grid">
+              <div class="pet-mood-card">
+                <span>Pet mood</span>
+                <strong id="petMoodLarge">Sleepy</strong>
+                <p id="petMoodReason">Log today to wake Mochi up.</p>
+              </div>
+              <div class="pet-mood-card">
+                <span>Energy</span>
+                <strong id="petEnergy">0%</strong>
+                <p>Daily logging increases energy.</p>
+              </div>
+              <div class="pet-mood-card">
+                <span>Happiness</span>
+                <strong id="petHappiness">0%</strong>
+                <p>Savings and balance improve happiness.</p>
+              </div>
+              <div class="pet-mood-card">
+                <span>Mess level</span>
+                <strong id="messLevel">0%</strong>
+                <p>Overspending and impulse buys create clutter.</p>
+              </div>
+            </div>
+            <div id="petAchievements" class="achievement-grid"></div>
+          </article>
+
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Room behavior guide</h3>
+                <p>How your actions affect the pet room</p>
+              </div>
+            </div>
+            <div class="guide-list">
+              <div class="guide-item"><strong>Saving money</strong><p>Grows the plant, fills the jar, unlocks decor and makes Mochi happy.</p></div>
+              <div class="guide-item"><strong>Overspending</strong><p>Adds clutter, dims the room and can make Mochi stressed.</p></div>
+              <div class="guide-item"><strong>Logging daily</strong><p>Keeps Mochi awake, playful and active.</p></div>
+              <div class="guide-item"><strong>Skipping logging</strong><p>Mochi gets sleepy and the room feels less alive.</p></div>
+              <div class="guide-item"><strong>Hitting target</strong><p>Unlocks sparkles, fairy lights and shelf decor.</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="insights" class="screen">
+        <div class="two-col form-layout">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Insights</h3>
+                <p>What your room is telling you</p>
+              </div>
+            </div>
+            <div id="insightList" class="insight-list"></div>
+          </article>
+
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Category pressure</h3>
+                <p>Where room stress is coming from</p>
+              </div>
+            </div>
+            <div id="categoryGrid" class="category-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="two-col form-layout">
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Income setup</h3>
+                <p>Editable fixed income details</p>
+              </div>
+            </div>
+            <form id="incomeForm" class="form-grid">
+              <label>
+                <span>Gross salary</span>
+                <input id="grossSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>In-hand salary</span>
+                <input id="inHandSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Other fixed income</span>
+                <input id="otherIncomeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Monthly savings target</span>
+                <input id="monthlySavingsTargetInput" type="number" min="0" step="1">
+              </label>
+              <button class="btn primary full-width" type="submit">Save income setup</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-head small-gap">
+              <div>
+                <h3>Fixed room costs</h3>
+                <p>These affect room stability and insights</p>
+              </div>
+            </div>
+            <form id="fixedForm" class="form-grid">
+              <label><span>Rent</span><input id="fixedRentInput" type="number" min="0" step="1"></label>
+              <label><span>Mom contribution</span><input id="fixedMomInput" type="number" min="0" step="1"></label>
+              <label><span>Transport</span><input id="fixedTransportInput" type="number" min="0" step="1"></label>
+              <label><span>Electricity</span><input id="fixedElectricityInput" type="number" min="0" step="1"></label>
+              <label><span>WiFi</span><input id="fixedWifiInput" type="number" min="0" step="1"></label>
+              <label><span>Appliances</span><input id="fixedAppliancesInput" type="number" min="0" step="1"></label>
+              <label><span>Groceries base</span><input id="fixedGroceriesInput" type="number" min="0" step="1"></label>
+              <label><span>Comfort budget</span><input id="fixedComfortInput" type="number" min="0" step="1"></label>
+              <button class="btn primary full-width" type="submit">Save fixed costs</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section id="history" class="screen">
+        <article class="card">
+          <div class="section-head history-head">
+            <div>
+              <h3>History</h3>
+              <p>Search your full room log</p>
+            </div>
+            <div class="filters">
+              <input id="searchInput" type="text" placeholder="Search title or note">
+              <select id="filterType">
+                <option value="all">All types</option>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+                <option value="saving">Saving</option>
+                <option value="breakfast">Breakfast</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Label</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
