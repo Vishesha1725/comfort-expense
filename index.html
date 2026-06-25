@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Mood Island</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="skyScene" class="sky-scene weather-sunny">
+    <div class="sun"></div>
+    <div class="moon"></div>
+    <div class="cloud cloud-one"></div>
+    <div class="cloud cloud-two"></div>
+    <div class="cloud cloud-three"></div>
+    <div class="rain-layer"></div>
+    <div class="lightning"></div>
+    <div class="stars"></div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar island-card">
+      <div class="brand">
+        <div class="brand-icon">🏝️</div>
+        <div>
+          <h1>Money Mood Island</h1>
+          <p>Your budget as a tiny living island</p>
+        </div>
+      </div>
+
+      <div class="weather-badge">
+        <span>Current weather</span>
+        <strong id="weatherLabel">Sunny</strong>
+        <p id="weatherReason">Add entries to activate island weather.</p>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-screen="home">Island Home</button>
+        <button class="nav-btn" data-screen="dailyLog">Daily Log Beach</button>
+        <button class="nav-btn" data-screen="savings">Savings Cove</button>
+        <button class="nav-btn" data-screen="weekly">Weekly Mood Map</button>
+        <button class="nav-btn" data-screen="insights">Island Insights</button>
+        <button class="nav-btn" data-screen="settings">Settings</button>
+        <button class="nav-btn" data-screen="history">History</button>
+      </nav>
+
+      <div class="mini-card">
+        <p>Default salary setup</p>
+        <h2>₹66,000</h2>
+        <span>Gross salary</span>
+        <h2>₹60,000</h2>
+        <span>In-hand salary</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">cute island · moving objects · smart budget</p>
+          <h2>Your money habits create the weather, buildings, boats and storms.</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="btn secondary">Load sample</button>
+          <button id="exportBtn" class="btn secondary">Export backup</button>
+          <label class="btn secondary">
+            Import backup
+            <input id="importInput" type="file" accept="application/json" hidden>
+          </label>
+          <button id="clearBtn" class="btn danger">Reset</button>
+        </div>
+      </header>
+
+      <section id="home" class="screen active-screen">
+        <div class="hero-grid">
+          <article class="island-card island-stage-card">
+            <div class="stage-header">
+              <div>
+                <p class="eyebrow">Island home</p>
+                <h3 id="islandHeadline">Your island is waking up</h3>
+                <p id="islandSubline">Daily logging brings sunshine. Saving grows the island.</p>
+              </div>
+              <div class="mood-score">
+                <span>Mood Score</span>
+                <strong id="moodScore">0</strong>
+              </div>
+            </div>
+
+            <div id="islandStage" class="island-stage">
+              <div class="scene-sun-rays"></div>
+
+              <div class="floating-cloud mini-cloud c1"></div>
+              <div class="floating-cloud mini-cloud c2"></div>
+
+              <div class="ocean">
+                <div class="wave wave-a"></div>
+                <div class="wave wave-b"></div>
+                <div class="wave wave-c"></div>
+              </div>
+
+              <div id="boat" class="boat">
+                <div class="boat-sail"></div>
+                <div class="boat-body"></div>
+              </div>
+
+              <div id="mainIsland" class="main-island">
+                <div class="sand"></div>
+
+                <div id="house" class="house">
+                  <div class="roof"></div>
+                  <div class="house-body">
+                    <span class="window"></span>
+                    <span class="door"></span>
+                  </div>
+                </div>
+
+                <div class="palm palm-left">
+                  <div class="trunk"></div>
+                  <div class="leaves"></div>
+                </div>
+                <div class="palm palm-right">
+                  <div class="trunk"></div>
+                  <div class="leaves"></div>
+                </div>
+
+                <div id="lighthouse" class="lighthouse">
+                  <div class="light-beam"></div>
+                  <div class="light-top"></div>
+                  <div class="tower"></div>
+                  <span>♥</span>
+                </div>
+
+                <div id="cafeCluster" class="cafe-cluster"></div>
+                <div id="roadPath" class="road-path"></div>
+
+                <div id="treasureChest" class="treasure-chest">
+                  <div class="chest-lid"></div>
+                  <div class="chest-body"></div>
+                  <div class="chest-lock">₹</div>
+                </div>
+
+                <div id="signalTower" class="signal-tower">
+                  <div></div><span></span><i></i>
+                </div>
+
+                <div class="flower-field" id="flowerField"></div>
+              </div>
+
+              <div class="storm-overlay"></div>
+              <div id="coinRain" class="coin-rain"></div>
+            </div>
+          </article>
+
+          <article class="island-card side-dashboard">
+            <div class="panel-head">
+              <h3>Island status</h3>
+              <p>What your month currently looks like</p>
+            </div>
+            <div class="status-grid">
+              <div class="status-pill">
+                <span>Money left</span>
+                <strong id="moneyLeftHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Daily safe spend</span>
+                <strong id="dailySafeHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Saved</span>
+                <strong id="savedHero">₹0</strong>
+              </div>
+              <div class="status-pill">
+                <span>Log streak</span>
+                <strong id="streakHero">0 days</strong>
+              </div>
+            </div>
+
+            <div class="panel-head lower-head">
+              <h3>Quick island actions</h3>
+              <p>Fast log common items</p>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-type="expense" data-category="Food Delivery" data-title="Zomato" data-amount="350" data-label="Worth it">Zomato ₹350</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Zepto" data-amount="500" data-label="Necessary">Zepto ₹500</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Blinkit" data-amount="420" data-label="Necessary">Blinkit ₹420</button>
+              <button class="quick-btn" data-type="expense" data-category="Transport" data-title="Cab / Metro" data-amount="250" data-label="Necessary">Transport ₹250</button>
+              <button class="quick-btn" data-type="saving" data-category="Travel Fund" data-title="Travel fund saving" data-amount="1000" data-label="Smart">Save ₹1000</button>
+              <button class="quick-btn" data-type="breakfast" data-category="Office Breakfast" data-title="Office coffee" data-amount="90" data-label="Worth it">Coffee ₹90</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="stats-grid">
+          <article class="island-card stat-card">
+            <p>In-hand income</p>
+            <h3 id="incomeCard">₹60,000</h3>
+            <span>salary + other fixed income</span>
+          </article>
+          <article class="island-card stat-card">
+            <p>Spent this month</p>
+            <h3 id="spentCard">₹0</h3>
+            <span>expenses + breakfast</span>
+          </article>
+          <article class="island-card stat-card">
+            <p>Savings this month</p>
+            <h3 id="savedCard">₹0</h3>
+            <span>goals and funds</span>
+          </article>
+          <article class="island-card stat-card">
+            <p>Food app island</p>
+            <h3 id="foodAppCard">₹0</h3>
+            <span>Zomato / Zepto / Blinkit</span>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Island build map</h3>
+              <p>How your spending creates island objects</p>
+            </div>
+            <div id="objectMap" class="object-map"></div>
+          </article>
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Today’s island journal</h3>
+              <p>Entries logged today</p>
+            </div>
+            <div id="todayEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="dailyLog" class="screen">
+        <div class="two-col form-layout">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Daily Log Beach Board</h3>
+              <p>Add the money move and watch the island react</p>
+            </div>
+            <form id="entryForm" class="form-grid">
+              <label>
+                <span>Date</span>
+                <input id="entryDate" type="date" required>
+              </label>
+              <label>
+                <span>Type</span>
+                <select id="entryType" required>
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                  <option value="saving">Saving</option>
+                  <option value="breakfast">Breakfast / snack</option>
+                </select>
+              </label>
+              <label>
+                <span>Category</span>
+                <select id="entryCategory" required></select>
+              </label>
+              <label>
+                <span>Amount</span>
+                <input id="entryAmount" type="number" min="0" step="1" placeholder="0" required>
+              </label>
+              <label>
+                <span>Title</span>
+                <input id="entryTitle" type="text" placeholder="Example: Zomato dinner" required>
+              </label>
+              <label>
+                <span>Label</span>
+                <select id="entryLabel">
+                  <option value="Necessary">Necessary</option>
+                  <option value="Worth it">Worth it</option>
+                  <option value="Impulse">Impulse</option>
+                  <option value="Regret">Regret</option>
+                  <option value="Smart">Smart</option>
+                </select>
+              </label>
+              <label class="full-width">
+                <span>Note</span>
+                <textarea id="entryNote" rows="3" placeholder="Optional note"></textarea>
+              </label>
+              <button class="btn primary full-width" type="submit">Add to island</button>
+            </form>
+          </article>
+
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Recent island activity</h3>
+              <p>Latest logs</p>
+            </div>
+            <div id="recentEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="savings" class="screen">
+        <div class="two-col form-layout">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Savings Cove</h3>
+              <p>Savings fill the treasure chest and unlock island upgrades</p>
+            </div>
+
+            <div class="treasure-progress-wrap">
+              <div class="big-chest">
+                <div class="big-chest-lid"></div>
+                <div class="big-chest-body">
+                  <span>₹</span>
+                </div>
+                <div id="bigChestGlow" class="big-chest-glow"></div>
+              </div>
+              <div class="treasure-stats">
+                <div>
+                  <span>Total saved</span>
+                  <strong id="totalSavedCove">₹0</strong>
+                </div>
+                <div>
+                  <span>Monthly target</span>
+                  <strong id="monthlyTargetCove">₹0</strong>
+                </div>
+                <div>
+                  <span>Island growth</span>
+                  <strong id="islandGrowthCove">0%</strong>
+                </div>
+              </div>
+              <div class="meter-track">
+                <div id="savingsMeter" class="meter-fill"></div>
+              </div>
+            </div>
+
+            <form id="goalForm" class="single-form">
+              <label>
+                <span>Goal</span>
+                <select id="goalName"></select>
+              </label>
+              <label>
+                <span>Add saving</span>
+                <input id="goalAmount" type="number" min="1" step="1" placeholder="1000">
+              </label>
+              <button class="btn primary" type="submit">Add saving</button>
+            </form>
+          </article>
+
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Goal islands</h3>
+              <p>Each fund creates part of the island</p>
+            </div>
+            <div id="goalGrid" class="goal-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="weekly" class="screen">
+        <div class="two-col form-layout">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Weekly Mood Map</h3>
+              <p>7-day weather and spending summary</p>
+            </div>
+            <div id="weeklyMap" class="weekly-map"></div>
+          </article>
+
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Weekly tide summary</h3>
+              <p>Pattern check</p>
+            </div>
+            <div id="weeklySummary" class="summary-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="insights" class="screen">
+        <div class="two-col form-layout">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Island Insights</h3>
+              <p>What the island is telling you</p>
+            </div>
+            <div id="insightList" class="insight-list"></div>
+          </article>
+
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Category ecosystem</h3>
+              <p>Category-wise island pressure</p>
+            </div>
+            <div id="categoryEcosystem" class="ecosystem-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="two-col form-layout">
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Income setup</h3>
+              <p>Editable salary and fixed income</p>
+            </div>
+            <form id="incomeForm" class="form-grid">
+              <label>
+                <span>Gross salary</span>
+                <input id="grossSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>In-hand salary</span>
+                <input id="inHandSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Other fixed income</span>
+                <input id="otherIncomeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Monthly savings target</span>
+                <input id="monthlySavingsTargetInput" type="number" min="0" step="1">
+              </label>
+              <button class="btn primary full-width" type="submit">Save income setup</button>
+            </form>
+          </article>
+
+          <article class="island-card">
+            <div class="panel-head">
+              <h3>Fixed island costs</h3>
+              <p>These affect the house and island stability</p>
+            </div>
+            <form id="fixedForm" class="form-grid">
+              <label><span>Rent</span><input id="fixedRentInput" type="number" min="0" step="1"></label>
+              <label><span>Mom contribution</span><input id="fixedMomInput" type="number" min="0" step="1"></label>
+              <label><span>Transport</span><input id="fixedTransportInput" type="number" min="0" step="1"></label>
+              <label><span>Electricity</span><input id="fixedElectricityInput" type="number" min="0" step="1"></label>
+              <label><span>WiFi</span><input id="fixedWifiInput" type="number" min="0" step="1"></label>
+              <label><span>Appliances</span><input id="fixedAppliancesInput" type="number" min="0" step="1"></label>
+              <label><span>Groceries base</span><input id="fixedGroceriesInput" type="number" min="0" step="1"></label>
+              <label><span>Comfort budget</span><input id="fixedComfortInput" type="number" min="0" step="1"></label>
+              <button class="btn primary full-width" type="submit">Save fixed costs</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section id="history" class="screen">
+        <article class="island-card">
+          <div class="panel-head history-head">
+            <div>
+              <h3>History</h3>
+              <p>Search your full island log</p>
+            </div>
+            <div class="filters">
+              <input id="searchInput" type="text" placeholder="Search title or note">
+              <select id="filterType">
+                <option value="all">All types</option>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+                <option value="saving">Saving</option>
+                <option value="breakfast">Breakfast</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Label</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
