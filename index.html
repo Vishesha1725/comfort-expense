@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finance Tamagotchi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar panel soft-shadow">
+      <div class="brand">
+        <div class="brand-icon">₹</div>
+        <div>
+          <h1>Finance Tamagotchi</h1>
+          <p>Your money has a pet now</p>
+        </div>
+      </div>
+
+      <div class="pet-mini panel mini-panel">
+        <div class="mini-face">◕ ◕</div>
+        <div>
+          <span class="tiny-label">Pet</span>
+          <strong id="miniPetName">Rupi</strong>
+          <p id="miniPetMood">Mood: loading...</p>
+        </div>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-screen="dashboard">Pet Room</button>
+        <button class="nav-btn" data-screen="dailyLog">Daily Log</button>
+        <button class="nav-btn" data-screen="goals">Goals & Accessories</button>
+        <button class="nav-btn" data-screen="challenges">Challenges</button>
+        <button class="nav-btn" data-screen="history">History</button>
+        <button class="nav-btn" data-screen="settings">Settings</button>
+      </nav>
+
+      <div class="sidebar-note panel mini-panel">
+        <h3>Default setup</h3>
+        <p>Gross salary: <strong>₹66,000</strong></p>
+        <p>In-hand salary: <strong>₹60,000</strong></p>
+        <p>Everything is editable.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Cute. playful. advanced.</p>
+          <h2>Keep your pet happy by managing your money better.</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="btn secondary">Load sample</button>
+          <button id="exportBtn" class="btn secondary">Export backup</button>
+          <label class="btn secondary file-btn">
+            Import backup
+            <input id="importInput" type="file" accept="application/json" hidden>
+          </label>
+          <button id="clearBtn" class="btn danger">Reset</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="screen active-screen">
+        <div class="hero-grid">
+          <article class="panel hero-panel soft-shadow">
+            <div class="hero-copy">
+              <p class="eyebrow">Pet status</p>
+              <h3 id="petHeadline">Rupi is waking up...</h3>
+              <p id="petSubline">Add entries to see your Finance Tamagotchi come alive.</p>
+              <div class="hero-stats">
+                <div class="hero-pill">
+                  <span>Level</span>
+                  <strong id="levelBadge">1</strong>
+                </div>
+                <div class="hero-pill">
+                  <span>XP</span>
+                  <strong id="xpLabel">0 / 100</strong>
+                </div>
+                <div class="hero-pill">
+                  <span>Streak</span>
+                  <strong id="streakLabel">0 days</strong>
+                </div>
+              </div>
+              <div class="xp-track">
+                <div id="xpFill" class="xp-fill"></div>
+              </div>
+            </div>
+
+            <div class="pet-stage-wrap">
+              <div class="room-sticker">PET ROOM</div>
+              <div id="petStage" class="pet-stage mood-happy">
+                <div id="petAccessoryLeft" class="pet-accessory acc-left hidden"></div>
+                <div id="petAccessoryTop" class="pet-accessory acc-top hidden"></div>
+                <div id="petAccessoryRight" class="pet-accessory acc-right hidden"></div>
+                <div class="pet-shadow"></div>
+                <div id="petCharacter" class="pet-character">
+                  <div id="petEars" class="pet-ears"></div>
+                  <div id="petBody" class="pet-body">
+                    <div class="pet-cheek cheek-left"></div>
+                    <div class="pet-cheek cheek-right"></div>
+                    <div id="petEyes" class="pet-eyes">◕ ◕</div>
+                    <div id="petMouth" class="pet-mouth">ᴗ</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel side-hero soft-shadow">
+            <div class="panel-head">
+              <h3>Daily challenge</h3>
+              <p>Keep your pet happy today</p>
+            </div>
+            <div id="todayChallengeCard" class="challenge-card featured"></div>
+            <div class="panel-head lower-head">
+              <h3>Accessory shelf</h3>
+              <p>Unlock these by saving</p>
+            </div>
+            <div id="quickAccessoryShelf" class="accessory-shelf"></div>
+          </article>
+        </div>
+
+        <div class="stats-grid">
+          <article class="panel stat-card soft-shadow">
+            <p>In-hand salary</p>
+            <h3 id="inHandSalaryCard">₹60,000</h3>
+            <span>Editable base income</span>
+          </article>
+          <article class="panel stat-card soft-shadow">
+            <p>Month spent</p>
+            <h3 id="monthSpentCard">₹0</h3>
+            <span>Expenses + breakfast spends</span>
+          </article>
+          <article class="panel stat-card soft-shadow">
+            <p>Goal savings</p>
+            <h3 id="monthSavedCard">₹0</h3>
+            <span>Savings make your pet happy</span>
+          </article>
+          <article class="panel stat-card soft-shadow">
+            <p>Money left</p>
+            <h3 id="moneyLeftCard">₹0</h3>
+            <span>Income minus spend and savings</span>
+          </article>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Pet health meters</h3>
+              <p>These change with your behavior</p>
+            </div>
+            <div id="petMeters" class="meter-list"></div>
+          </article>
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Money snapshot</h3>
+              <p>Quick overview of your month</p>
+            </div>
+            <div id="moneySnapshot" class="snapshot-grid"></div>
+          </article>
+        </div>
+
+        <div class="metrics-grid">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Smart pet insights</h3>
+              <p>Why your pet feels the way it does</p>
+            </div>
+            <div id="insightList" class="insight-list"></div>
+          </article>
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>7-day activity bubbles</h3>
+              <p>Logging activity + spend pattern</p>
+            </div>
+            <div id="activityBubbles" class="bubble-chart"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="dailyLog" class="screen">
+        <div class="metrics-grid form-layout">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Add money entry</h3>
+              <p>Expenses, income, breakfast, or savings</p>
+            </div>
+            <form id="entryForm" class="form-grid">
+              <label>
+                <span>Date</span>
+                <input id="entryDate" type="date" required>
+              </label>
+              <label>
+                <span>Type</span>
+                <select id="entryType" required>
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                  <option value="saving">Saving</option>
+                  <option value="breakfast">Breakfast / snack</option>
+                </select>
+              </label>
+              <label>
+                <span>Category</span>
+                <select id="entryCategory" required></select>
+              </label>
+              <label>
+                <span>Amount</span>
+                <input id="entryAmount" type="number" min="0" step="1" placeholder="0" required>
+              </label>
+              <label>
+                <span>Title</span>
+                <input id="entryTitle" type="text" placeholder="Example: Zomato dinner" required>
+              </label>
+              <label>
+                <span>Feeling</span>
+                <select id="entryFeeling">
+                  <option value="Necessary">Necessary</option>
+                  <option value="Worth it">Worth it</option>
+                  <option value="Impulse">Impulse</option>
+                  <option value="Regret">Regret</option>
+                  <option value="Smart">Smart</option>
+                </select>
+              </label>
+              <label class="full-width">
+                <span>Note</span>
+                <textarea id="entryNote" rows="3" placeholder="Optional note"></textarea>
+              </label>
+              <button class="btn primary full-width" type="submit">Save entry</button>
+            </form>
+          </article>
+
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Quick actions</h3>
+              <p>Fast logging for common spends</p>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-type="expense" data-category="Food Delivery" data-title="Zomato" data-amount="350">Zomato ₹350</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Zepto" data-amount="500">Zepto ₹500</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Blinkit" data-amount="420">Blinkit ₹420</button>
+              <button class="quick-btn" data-type="expense" data-category="Transport" data-title="Cab / Metro" data-amount="250">Transport ₹250</button>
+              <button class="quick-btn" data-type="breakfast" data-category="Office Breakfast" data-title="Office coffee" data-amount="90">Coffee ₹90</button>
+              <button class="quick-btn" data-type="saving" data-category="Emergency Fund" data-title="Emergency fund saving" data-amount="1000">Save ₹1000</button>
+            </div>
+
+            <div class="panel-head lower-head">
+              <h3>Recent entries</h3>
+              <p>Your latest activity</p>
+            </div>
+            <div id="recentEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="goals" class="screen">
+        <div class="metrics-grid form-layout">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Savings goals</h3>
+              <p>Save more, unlock more accessories</p>
+            </div>
+            <div id="goalGrid" class="goal-grid"></div>
+          </article>
+
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Accessory room</h3>
+              <p>Unlocked by progress on goals</p>
+            </div>
+            <div id="accessoryGrid" class="accessory-grid"></div>
+
+            <div class="panel-head lower-head">
+              <h3>Add saving to a goal</h3>
+              <p>Every saving boosts pet happiness</p>
+            </div>
+            <form id="goalForm" class="single-form">
+              <label>
+                <span>Goal</span>
+                <select id="goalName"></select>
+              </label>
+              <label>
+                <span>Amount</span>
+                <input id="goalAmount" type="number" min="1" step="1" placeholder="1000">
+              </label>
+              <button class="btn primary" type="submit">Add saving</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section id="challenges" class="screen">
+        <div class="metrics-grid form-layout">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Daily & weekly challenges</h3>
+              <p>Complete these to earn XP and keep your pet cheerful</p>
+            </div>
+            <div id="challengeGrid" class="challenge-grid"></div>
+          </article>
+
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Achievements</h3>
+              <p>Your long-term wins</p>
+            </div>
+            <div id="achievementGrid" class="achievement-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="history" class="screen">
+        <article class="panel soft-shadow">
+          <div class="panel-head history-head">
+            <div>
+              <h3>History</h3>
+              <p>Search and review your entries</p>
+            </div>
+            <div class="filters">
+              <input id="searchInput" type="text" placeholder="Search title or note">
+              <select id="filterType">
+                <option value="all">All types</option>
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+                <option value="saving">Saving</option>
+                <option value="breakfast">Breakfast</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Feeling</th>
+                  <th>Amount</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="metrics-grid form-layout">
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Income setup</h3>
+              <p>Use your real salary setup</p>
+            </div>
+            <form id="incomeForm" class="form-grid">
+              <label>
+                <span>Pet name</span>
+                <input id="petNameInput" type="text" placeholder="Rupi">
+              </label>
+              <label>
+                <span>Gross salary</span>
+                <input id="grossSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>In-hand salary</span>
+                <input id="inHandSalaryInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Other fixed income</span>
+                <input id="otherIncomeInput" type="number" min="0" step="1">
+              </label>
+              <label class="full-width">
+                <span>Monthly savings target</span>
+                <input id="monthlySavingsTargetInput" type="number" min="0" step="1">
+              </label>
+              <button class="btn primary full-width" type="submit">Save income setup</button>
+            </form>
+          </article>
+
+          <article class="panel soft-shadow">
+            <div class="panel-head">
+              <h3>Fixed costs</h3>
+              <p>Used for budget health and pet mood</p>
+            </div>
+            <form id="fixedForm" class="form-grid">
+              <label>
+                <span>Rent</span>
+                <input id="fixedRentInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Mom contribution</span>
+                <input id="fixedMomInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Transport</span>
+                <input id="fixedTransportInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Electricity</span>
+                <input id="fixedElectricityInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>WiFi</span>
+                <input id="fixedWifiInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Appliances</span>
+                <input id="fixedAppliancesInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Groceries base</span>
+                <input id="fixedGroceriesInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Comfort budget</span>
+                <input id="fixedComfortInput" type="number" min="0" step="1">
+              </label>
+              <button class="btn primary full-width" type="submit">Save fixed costs</button>
+            </form>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
