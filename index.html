@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Money Quest Pet — Pixel RPG Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="pixel-bg">
+    <div class="grid-bg"></div>
+    <div class="scanline"></div>
+    <div class="bg-cube c1"></div>
+    <div class="bg-cube c2"></div>
+    <div class="bg-cube c3"></div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar pixel-panel">
+      <div class="brand-row">
+        <div class="brand-mark">MQ</div>
+        <div>
+          <h1>MoneyQuest OS</h1>
+          <p>Pixel RPG Edition</p>
+        </div>
+      </div>
+
+      <div class="level-card pixel-inset">
+        <span class="tiny-label">CURRENT RANK</span>
+        <strong id="sideLevel">LV 1</strong>
+        <p id="sideTitle">Rookie Tracker</p>
+        <div class="meter"><div id="sideXpFill"></div></div>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-btn active" data-screen="home">01 Base</button>
+        <button class="nav-btn" data-screen="log">02 Daily Log</button>
+        <button class="nav-btn" data-screen="arena">03 Risk Arena</button>
+        <button class="nav-btn" data-screen="missions">04 Missions</button>
+        <button class="nav-btn" data-screen="vault">05 Vault</button>
+        <button class="nav-btn" data-screen="terminal">06 Finance Terminal</button>
+        <button class="nav-btn" data-screen="inventory">07 Inventory</button>
+        <button class="nav-btn" data-screen="settings">08 Settings</button>
+        <button class="nav-btn" data-screen="history">09 History</button>
+      </nav>
+
+      <div class="side-note pixel-inset">
+        <span class="tiny-label">DEFAULT PROTECTED COSTS</span>
+        <p>Rent ₹23,000</p>
+        <p>Furniture ₹2,000</p>
+        <p>WiFi ₹499 from Sep 2026</p>
+        <p>Mom is separate, not fixed.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">sharp pixel RPG · serious finance terminal · advanced safe-spend engine</p>
+          <h2>Track expenses like a game, but calculate your money like a proper budget system.</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="pixel-btn secondary">Load sample</button>
+          <button id="csvBtn" class="pixel-btn secondary">Export CSV</button>
+          <button id="exportBtn" class="pixel-btn secondary">Backup</button>
+          <label class="pixel-btn secondary">Import <input id="importInput" type="file" accept="application/json" hidden></label>
+        </div>
+      </header>
+
+      <section id="home" class="screen active">
+        <div class="hero-grid">
+          <article class="pixel-panel hero-card">
+            <div class="panel-heading">
+              <div>
+                <span class="tiny-label">PET BASE</span>
+                <h3 id="baseHeadline">Base is initializing</h3>
+                <p id="baseSubline">Log an entry to activate your finance companion.</p>
+              </div>
+              <div class="score-box">
+                <span>HEALTH</span>
+                <strong id="healthScore">0</strong>
+              </div>
+            </div>
+
+            <div id="gameStage" class="game-stage state-neutral">
+              <div class="pixel-skyline"></div>
+              <div class="stage-grid"></div>
+              <div class="coin-ring"></div>
+              <div id="fxLayer" class="fx-layer"></div>
+              <div id="xpPopup" class="xp-popup">+20 XP</div>
+
+              <div class="rank-float pixel-inset">
+                <div class="rank-top"><span id="rankText">LV 1 · Rookie Tracker</span><span id="xpNumber">0 XP</span></div>
+                <div class="meter big"><div id="xpFill"></div></div>
+              </div>
+
+              <div class="sprite-zone helper-zone">
+                <span class="dock-label">HELPER</span>
+                <div id="activeHelperSprite"></div>
+              </div>
+              <div class="sprite-zone monster-zone">
+                <span class="dock-label">RISK</span>
+                <div id="activeMonsterSprite"></div>
+              </div>
+
+              <div class="main-pet-wrap">
+                <div id="mainPetSprite"></div>
+                <div id="petAccessoryLayer" class="pet-accessory-layer"></div>
+              </div>
+
+              <div class="pixel-platform">
+                <div class="platform-top"></div>
+                <div class="platform-front"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="pixel-panel side-panel">
+            <div class="panel-heading small">
+              <div><h3>Status</h3><p>Budget state for this month</p></div>
+            </div>
+            <div class="status-grid">
+              <div class="status-cell"><span>Daily safe</span><strong id="dailySafeHero">₹0</strong></div>
+              <div class="status-cell"><span>Money left</span><strong id="moneyLeftHero">₹0</strong></div>
+              <div class="status-cell"><span>Protected fixed</span><strong id="fixedHero">₹0</strong></div>
+              <div class="status-cell"><span>Saved</span><strong id="savedHero">₹0</strong></div>
+            </div>
+
+            <div class="panel-heading small lower">
+              <div><h3>Quick log</h3><p>Earn XP instantly</p></div>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-type="expense" data-category="Food Delivery" data-title="Zomato order" data-amount="350" data-label="Worth it">Zomato ₹350</button>
+              <button class="quick-btn" data-type="expense" data-category="Groceries" data-title="Zepto groceries" data-amount="500" data-label="Necessary">Zepto ₹500</button>
+              <button class="quick-btn" data-type="expense" data-category="Transport" data-title="Cab / Metro" data-amount="250" data-label="Necessary">Transport ₹250</button>
+              <button class="quick-btn" data-type="breakfast" data-category="Office Breakfast" data-title="Office coffee" data-amount="90" data-label="Worth it">Coffee ₹90</button>
+              <button class="quick-btn" data-type="saving" data-category="Emergency Fund" data-title="Emergency fund saving" data-amount="1000" data-label="Smart">Save ₹1000</button>
+              <button class="quick-btn" data-type="expense" data-category="Shopping" data-title="Impulse treat" data-amount="699" data-label="Impulse">Treat ₹699</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="stats-grid">
+          <article class="pixel-panel stat-card"><span>Income</span><strong id="incomeStat">₹0</strong><p>In-hand + extra income</p></article>
+          <article class="pixel-panel stat-card"><span>Variable spend</span><strong id="variableStat">₹0</strong><p>Excludes protected fixed costs</p></article>
+          <article class="pixel-panel stat-card"><span>Projected end</span><strong id="projectedStat">₹0</strong><p>After protected costs and savings</p></article>
+          <article class="pixel-panel stat-card"><span>Active risk</span><strong id="riskStat">None</strong><p>Highest current monster</p></article>
+        </div>
+
+        <div class="two-col">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Today Missions</h3><p>Complete to increase XP and streak power</p></div></div>
+            <div id="todayMissionPreview" class="mission-list"></div>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Risk Alerts</h3><p>Smart warnings from Budget Owl</p></div></div>
+            <div id="riskAlerts" class="info-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="log" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Daily Log</h3><p>Every log gives XP and updates the map</p></div></div>
+            <form id="entryForm" class="form-grid">
+              <label><span>Date</span><input id="entryDate" type="date" required></label>
+              <label><span>Type</span><select id="entryType"><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Saving</option><option value="breakfast">Breakfast / snack</option></select></label>
+              <label><span>Category</span><select id="entryCategory" required></select></label>
+              <label><span>Amount</span><input id="entryAmount" type="number" min="0" step="1" required></label>
+              <label><span>Title</span><input id="entryTitle" type="text" placeholder="Example: Zomato dinner" required></label>
+              <label><span>Label</span><select id="entryLabel"><option value="Necessary">Necessary</option><option value="Worth it">Worth it</option><option value="Impulse">Impulse</option><option value="Regret">Regret</option><option value="Smart">Smart</option></select></label>
+              <label class="full"><span>Note</span><textarea id="entryNote" rows="3" placeholder="Optional note"></textarea></label>
+              <button class="pixel-btn primary full" type="submit">Log entry + XP</button>
+            </form>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Recent Logs</h3><p>Receipt-style history</p></div></div>
+            <div id="recentEntries" class="entry-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="arena" class="screen">
+        <article class="pixel-panel">
+          <div class="panel-heading"><div><span class="tiny-label">RISK ARENA</span><h3>Spend Monsters</h3><p>Dormant → Growing → Angry → Boss Mode</p></div></div>
+          <div id="monsterGrid" class="monster-grid"></div>
+        </article>
+      </section>
+
+      <section id="missions" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Daily Missions</h3><p>Reset naturally every day</p></div></div>
+            <div id="dailyMissions" class="mission-list"></div>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Weekly Challenges</h3><p>Higher rewards and boss reduction</p></div></div>
+            <div id="weeklyMissions" class="mission-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="vault" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Vault Goals</h3><p>Savings unlock inventory items</p></div></div>
+            <div id="goalGrid" class="goal-grid"></div>
+            <form id="goalForm" class="single-form">
+              <label><span>Goal</span><select id="goalName"></select></label>
+              <label><span>Add saving</span><input id="goalAmount" type="number" min="1" step="1" placeholder="1000"></label>
+              <button class="pixel-btn primary" type="submit">Add</button>
+            </form>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Family Bucket</h3><p>Mom contribution is separate, not fixed by default</p></div></div>
+            <div id="momBucket" class="mom-bucket"></div>
+            <form id="momForm" class="single-form">
+              <label><span>Add mom contribution</span><input id="momAmount" type="number" min="1" step="1" placeholder="1000"></label>
+              <label><span>Note</span><input id="momNote" type="text" placeholder="Optional"></label>
+              <button class="pixel-btn primary" type="submit">Add</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section id="terminal" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel terminal-card">
+            <div class="panel-heading small"><div><h3>Finance Terminal</h3><p>Advanced safe-spend engine</p></div></div>
+            <div id="terminalGrid" class="terminal-grid"></div>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Month-End Boss</h3><p>Generated from your biggest risk</p></div></div>
+            <div id="bossCard" class="boss-card"></div>
+            <div class="panel-heading small lower"><div><h3>Download</h3><p>Export summaries without any server</p></div></div>
+            <div class="button-row">
+              <button id="summaryBtn" class="pixel-btn secondary">Download monthly summary</button>
+              <button id="resetMonthBtn" class="pixel-btn danger">Reset current month</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="inventory" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Character Inventory</h3><p>Queen removed. Panda included.</p></div></div>
+            <div id="characterGrid" class="character-grid"></div>
+          </article>
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Badges & Items</h3><p>Unlocked by behavior</p></div></div>
+            <div id="badgeGrid" class="badge-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="two-col form-layout">
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Income & Protected Costs</h3><p>All numbers editable</p></div></div>
+            <form id="settingsForm" class="form-grid">
+              <label><span>Gross salary</span><input id="grossSalaryInput" type="number" min="0" step="1"></label>
+              <label><span>In-hand salary</span><input id="inHandSalaryInput" type="number" min="0" step="1"></label>
+              <label><span>Other fixed income</span><input id="otherIncomeInput" type="number" min="0" step="1"></label>
+              <label><span>Monthly savings target</span><input id="monthlySavingsTargetInput" type="number" min="0" step="1"></label>
+              <label><span>Rent</span><input id="rentInput" type="number" min="0" step="1"></label>
+              <label><span>Furniture rent</span><input id="furnitureInput" type="number" min="0" step="1"></label>
+              <label><span>WiFi amount</span><input id="wifiInput" type="number" min="0" step="1"></label>
+              <label><span>WiFi fixed from</span><input id="wifiStartInput" type="month"></label>
+              <label><span>Mom target</span><input id="momTargetInput" type="number" min="0" step="1"></label>
+              <label class="toggle-label"><span>Protect mom bucket in daily safe spend?</span><input id="protectMomInput" type="checkbox"></label>
+              <button class="pixel-btn primary full" type="submit">Save core settings</button>
+            </form>
+          </article>
+
+          <article class="pixel-panel">
+            <div class="panel-heading small"><div><h3>Category Budgets</h3><p>Used by Risk Arena and missions</p></div></div>
+            <form id="budgetForm" class="form-grid">
+              <label><span>Food app budget</span><input id="foodBudgetInput" type="number" min="0" step="1"></label>
+              <label><span>Shopping budget</span><input id="shoppingBudgetInput" type="number" min="0" step="1"></label>
+              <label><span>Transport budget</span><input id="transportBudgetInput" type="number" min="0" step="1"></label>
+              <label><span>Other/random budget</span><input id="otherBudgetInput" type="number" min="0" step="1"></label>
+              <label><span>Weekly food app limit</span><input id="weeklyFoodInput" type="number" min="0" step="1"></label>
+              <label><span>Weekly saving mission</span><input id="weeklySavingInput" type="number" min="0" step="1"></label>
+              <button class="pixel-btn primary full" type="submit">Save budgets</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section id="history" class="screen">
+        <article class="pixel-panel">
+          <div class="panel-heading history-head">
+            <div><h3>History</h3><p>Search, delete, export, backup</p></div>
+            <div class="filters"><input id="searchInput" type="text" placeholder="Search"><select id="filterType"><option value="all">All</option><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Saving</option><option value="breakfast">Breakfast</option></select><button id="resetAllBtn" class="pixel-btn danger">Reset all</button></div>
+          </div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Title</th><th>Category</th><th>Type</th><th>Label</th><th>Amount</th><th>Action</th></tr></thead><tbody id="historyBody"></tbody></table></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
