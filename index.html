@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoneyQuest Pixel OS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Pixelify+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="moving-garden" aria-hidden="true">
+    <span class="leaf l1"></span><span class="leaf l2"></span><span class="leaf l3"></span><span class="leaf l4"></span>
+    <span class="flower f1"></span><span class="flower f2"></span><span class="flower f3"></span>
+  </div>
+
+  <div class="app">
+    <aside class="side pixel-window">
+      <div class="brand-row">
+        <div class="brand-mark">MQ</div>
+        <div>
+          <h1>MoneyQuest</h1>
+          <p>Pixel OS</p>
+        </div>
+      </div>
+      <div class="mini-status">
+        <span>LEVEL</span>
+        <strong id="sideLevel">1</strong>
+        <small id="sideLevelName">Rookie Tracker</small>
+        <div class="bar"><i id="sideXpFill"></i></div>
+      </div>
+      <nav class="nav" aria-label="App sections">
+        <button class="nav-btn active" data-screen="home">Home</button>
+        <button class="nav-btn" data-screen="add">Add</button>
+        <button class="nav-btn" data-screen="terminal">Terminal</button>
+        <button class="nav-btn" data-screen="risk">Risk</button>
+        <button class="nav-btn" data-screen="missions">Missions</button>
+        <button class="nav-btn" data-screen="vault">Vault</button>
+        <button class="nav-btn" data-screen="inventory">Inventory</button>
+        <button class="nav-btn" data-screen="settings">Settings</button>
+        <button class="nav-btn" data-screen="history">History</button>
+      </nav>
+      <div class="side-fixed">
+        <span>FIXED</span>
+        <strong>Rent + Furniture</strong>
+        <small>WiFi Sep+</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topline">
+        <div>
+          <p class="eyebrow">profile board · pixel finance · clean forms</p>
+          <h2>MoneyQuest Pixel OS</h2>
+        </div>
+        <div class="top-actions">
+          <button id="sampleBtn" class="px-btn">Sample</button>
+          <button id="backupBtn" class="px-btn">Backup</button>
+          <label class="px-btn">Import<input id="importInput" type="file" accept="application/json" hidden /></label>
+          <button id="csvBtn" class="px-btn">CSV</button>
+        </div>
+      </header>
+
+      <section id="home" class="screen active">
+        <div class="home-grid">
+          <article class="profile-board pixel-window">
+            <div class="board-grid"></div>
+
+            <div class="pixel-box box-intro">
+              <b>MEET THE PLAYER</b>
+              <span id="homeLevelText">Lv. 1 Rookie</span>
+            </div>
+            <div class="pixel-box box-money">
+              <b>MONEY LEFT</b>
+              <span id="homeMoneyLeft">₹0</span>
+            </div>
+            <div class="pixel-box box-safe">
+              <b>SAFE/DAY</b>
+              <span id="homeSafeSpend">₹0</span>
+            </div>
+            <div class="pixel-box box-risk">
+              <b>RISK</b>
+              <span id="homeRisk">LOW</span>
+            </div>
+            <div class="pixel-box box-fixed">
+              <b>FIXED</b>
+              <span id="homeFixed">₹25,000</span>
+            </div>
+            <div class="pixel-box box-vault">
+              <b>VAULT</b>
+              <span id="homeSaved">₹0</span>
+            </div>
+
+            <div class="avatar-zone">
+              <div class="profile-girl" aria-label="Pixel girl avatar">
+                <div class="hair"></div><div class="head"><i></i></div><div class="neck"></div>
+                <div class="top"></div><div class="skirt"></div><div class="leg leg-a"></div><div class="leg leg-b"></div><div class="shoe shoe-a"></div><div class="shoe shoe-b"></div>
+              </div>
+              <div class="pet pet-mochi"><span></span></div>
+              <div class="pet pet-panda"><span></span></div>
+              <div class="inventory-items">
+                <i class="obj coin"></i><i class="obj plant"></i><i class="obj router"></i><i class="obj house"></i><i class="obj shield"></i><i class="obj bag"></i>
+              </div>
+            </div>
+
+            <div class="xp-strip">
+              <span>XP</span>
+              <div class="bar"><i id="homeXpFill"></i></div>
+              <b id="homeXpText">0/1000</b>
+            </div>
+          </article>
+
+          <aside class="right-stack">
+            <article class="pixel-window compact-card">
+              <h3>Quick Add</h3>
+              <div class="quick-grid">
+                <button class="quick" data-type="expense" data-category="Food Delivery" data-title="Food app" data-amount="350" data-label="Worth it">Food ₹350</button>
+                <button class="quick" data-type="expense" data-category="Transport" data-title="Transport" data-amount="250" data-label="Necessary">Cab ₹250</button>
+                <button class="quick" data-type="expense" data-category="Groceries" data-title="Groceries" data-amount="500" data-label="Necessary">Grocery ₹500</button>
+                <button class="quick" data-type="saving" data-category="Emergency Fund" data-title="Emergency save" data-amount="1000" data-label="Smart">Save ₹1000</button>
+              </div>
+            </article>
+            <article class="pixel-window compact-card">
+              <h3>Today</h3>
+              <div id="todayMissions" class="mini-list"></div>
+            </article>
+            <article class="pixel-window compact-card">
+              <h3>Activity</h3>
+              <div id="todayEntries" class="mini-list"></div>
+            </article>
+          </aside>
+        </div>
+      </section>
+
+      <section id="add" class="screen">
+        <article class="pixel-window form-card">
+          <div class="section-head"><h3>Add Entry</h3><button id="noteToggle" class="mini-btn" type="button">Note</button></div>
+          <form id="entryForm" class="clean-form">
+            <div class="type-tabs" role="group" aria-label="Entry type">
+              <button type="button" class="type-tab active" data-type="expense">Expense</button>
+              <button type="button" class="type-tab" data-type="income">Income</button>
+              <button type="button" class="type-tab" data-type="saving">Saving</button>
+              <button type="button" class="type-tab" data-type="breakfast">Snack</button>
+            </div>
+            <input id="entryType" type="hidden" value="expense" />
+            <label><span>Amount</span><input id="entryAmount" type="number" min="0" step="1" placeholder="₹0" required /></label>
+            <label><span>Category</span><select id="entryCategory" required></select></label>
+            <label><span>Label</span><select id="entryLabel"><option>Necessary</option><option>Worth it</option><option>Smart</option><option>Impulse</option><option>Regret</option></select></label>
+            <label><span>Date</span><input id="entryDate" type="date" required /></label>
+            <label class="full"><span>Title</span><input id="entryTitle" type="text" placeholder="Short title" required /></label>
+            <label id="noteField" class="full hidden"><span>Note</span><textarea id="entryNote" rows="3" placeholder="Optional"></textarea></label>
+            <button class="save-btn full" type="submit">Save Entry</button>
+          </form>
+        </article>
+      </section>
+
+      <section id="terminal" class="screen">
+        <div class="terminal-grid" id="terminalGrid"></div>
+      </section>
+
+      <section id="risk" class="screen">
+        <div class="grid-cards" id="riskGrid"></div>
+      </section>
+
+      <section id="missions" class="screen">
+        <div class="two-col">
+          <article class="pixel-window"><h3>Daily</h3><div id="dailyMissionList" class="mission-list"></div></article>
+          <article class="pixel-window"><h3>Weekly</h3><div id="weeklyMissionList" class="mission-list"></div></article>
+        </div>
+      </section>
+
+      <section id="vault" class="screen">
+        <div class="two-col">
+          <article class="pixel-window"><h3>Goals</h3><div id="goalGrid" class="goal-grid"></div></article>
+          <article class="pixel-window"><h3>Mom Bucket</h3><div id="momBucket" class="bucket-card"></div></article>
+        </div>
+        <article class="pixel-window add-saving">
+          <h3>Add Saving</h3>
+          <form id="goalForm" class="inline-form"><select id="goalName"></select><input id="goalAmount" type="number" min="1" step="1" placeholder="Amount" /><button class="px-btn" type="submit">Add</button></form>
+        </article>
+      </section>
+
+      <section id="inventory" class="screen">
+        <div class="two-col">
+          <article class="pixel-window"><h3>Characters</h3><div id="charGrid" class="inventory-grid"></div></article>
+          <article class="pixel-window"><h3>Items</h3><div id="itemGrid" class="inventory-grid"></div></article>
+        </div>
+      </section>
+
+      <section id="settings" class="screen">
+        <div class="settings-grid">
+          <article class="pixel-window"><h3>Income</h3><form id="incomeForm" class="settings-form">
+            <label><span>Gross</span><input id="grossInput" type="number" min="0" step="1" /></label>
+            <label><span>In-hand</span><input id="inHandInput" type="number" min="0" step="1" /></label>
+            <label><span>Other</span><input id="otherIncomeInput" type="number" min="0" step="1" /></label>
+            <label><span>Savings target</span><input id="savingsTargetInput" type="number" min="0" step="1" /></label>
+            <button class="save-btn" type="submit">Save</button>
+          </form></article>
+          <article class="pixel-window"><h3>Fixed</h3><form id="fixedForm" class="settings-form">
+            <label><span>Rent</span><input id="rentInput" type="number" min="0" step="1" /></label>
+            <label><span>Furniture</span><input id="furnitureInput" type="number" min="0" step="1" /></label>
+            <label><span>WiFi</span><input id="wifiInput" type="number" min="0" step="1" /></label>
+            <label><span>WiFi from</span><input id="wifiMonthInput" type="month" /></label>
+            <button class="save-btn" type="submit">Save</button>
+          </form></article>
+          <article class="pixel-window"><h3>Limits</h3><form id="limitForm" class="settings-form">
+            <label><span>Food apps</span><input id="foodLimitInput" type="number" min="0" step="1" /></label>
+            <label><span>Shopping</span><input id="shoppingLimitInput" type="number" min="0" step="1" /></label>
+            <label><span>Transport</span><input id="transportLimitInput" type="number" min="0" step="1" /></label>
+            <label><span>Other</span><input id="otherLimitInput" type="number" min="0" step="1" /></label>
+            <button class="save-btn" type="submit">Save</button>
+          </form></article>
+          <article class="pixel-window"><h3>Mom</h3><form id="momForm" class="settings-form">
+            <label><span>Target</span><input id="momTargetInput" type="number" min="0" step="1" /></label>
+            <label class="check-line"><input id="protectMomInput" type="checkbox" /> <span>Protect in safe spend</span></label>
+            <button class="save-btn" type="submit">Save</button>
+            <button id="summaryBtn" class="px-btn" type="button">Summary</button>
+            <button id="resetMonthBtn" class="px-btn warn" type="button">Reset Month</button>
+            <button id="resetAllBtn" class="px-btn danger" type="button">Reset All</button>
+          </form></article>
+        </div>
+      </section>
+
+      <section id="history" class="screen">
+        <article class="pixel-window">
+          <div class="section-head"><h3>History</h3><div class="filters"><input id="searchInput" placeholder="Search" /><select id="filterType"><option value="all">All</option><option value="expense">Expense</option><option value="income">Income</option><option value="saving">Saving</option><option value="breakfast">Snack</option></select></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Title</th><th>Cat</th><th>Type</th><th>₹</th><th></th></tr></thead><tbody id="historyBody"></tbody></table></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div id="burst" class="burst" aria-hidden="true"></div>
+  <script src="app.js"></script>
+</body>
+</html>
