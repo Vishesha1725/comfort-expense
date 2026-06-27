@@ -78,7 +78,7 @@ function App() {
         </header>
 
         <AnimatePresence mode="wait">
-          <motion.section key={page} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
+          <motion.section className={`page-stage ${page === 'Settings' ? 'settings-stage' : ''}`} key={page} initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.2 }}>
             {page === 'Home' && <HomePage entries={entries} settings={settings} xp={xp} />}
             {page === 'Add Entry' && <AddEntry />}
             {page === 'Finance Terminal' && <TerminalPage entries={entries} settings={settings} />}
@@ -92,7 +92,7 @@ function App() {
         </AnimatePresence>
       </main>
 
-      <nav className="bottom-nav">{nav.slice(0, 5).map(({ page: item, icon: Icon, short }) => <button key={item} className={page === item ? 'active' : ''} onClick={() => setPage(item)}><Icon size={18} /><span>{short}</span></button>)}</nav>
+      <nav className="bottom-nav">{nav.map(({ page: item, icon: Icon, short }) => <button key={item} className={page === item ? 'active' : ''} onClick={() => setPage(item)} aria-label={item}><Icon size={18} /><span>{short}</span></button>)}</nav>
     </div>
   );
 
