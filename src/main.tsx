@@ -125,14 +125,43 @@ function HomePage({ entries, settings, xp }: { entries: Entry[]; settings: AppSe
   ];
   return <div className="home-board pixel-panel">
     <div className="board-stats">{cards.map(([label, value]) => <Metric key={label} label={label} value={value} />)}</div>
-    <div className="avatar-zone">
-      <motion.div className="girl" animate={{ y: [0, -5, 0] }} transition={{ repeat: Infinity, duration: 3 }}><i /></motion.div>
-      <motion.div className="mochi" animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 2.3 }} />
-      <motion.div className="panda" animate={{ rotate: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 2.8 }} />
-      <span className="float-item coin" /><span className="float-item bag" /><span className="float-item shield" /><span className="float-item router" />
+    <div className="profile-scene">
+      <div className="nature-sprigs" aria-hidden><i /><i /><i /></div>
+      <div className="inventory-orbit left">
+        <HeroItem kind="pouch" label="Pouch" />
+        <HeroItem kind="plant" label="Plant" />
+        <HeroItem kind="book" label="Log" />
+        <HeroItem kind="house" label="House" />
+      </div>
+      <motion.div className="character-card" animate={{ y: [0, -3, 0] }} transition={{ repeat: Infinity, duration: 3.8, ease: 'easeInOut' }}>
+        <div className="card-tag">Player</div>
+        <div className="avatar-plinth">
+          <div className="pixel-girl">
+            <span className="hair back" />
+            <span className="head"><i className="eye left" /><i className="eye right" /><i className="blush" /></span>
+            <span className="hair bang-a" /><span className="hair bang-b" />
+            <span className="body"><i /></span>
+            <span className="arm left" /><span className="arm right" />
+            <span className="leg left" /><span className="leg right" />
+          </div>
+          <motion.span className="pet mochi-pet" animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 2.4 }} />
+          <motion.span className="pet panda-pal" animate={{ rotate: [-2, 2, -2] }} transition={{ repeat: Infinity, duration: 3 }} />
+        </div>
+        <div className="profile-name"><b>Pixel Girl</b><span>{lvl.name}</span></div>
+      </motion.div>
+      <div className="inventory-orbit right">
+        <HeroItem kind="flower" label="Bloom" />
+        <HeroItem kind="piggy" label="Piggy" />
+        <HeroItem kind="router" label="WiFi" />
+        <HeroItem kind="sofa" label="Sofa" />
+      </div>
     </div>
     <div className="xp-line"><span>XP</span><Progress value={lvl.progress} /><b>{lvl.name}</b></div>
   </div>;
+}
+
+function HeroItem({ kind, label }: { kind: string; label: string }) {
+  return <motion.div className="hero-item" whileHover={{ y: -3 }}><span className={`item-icon ${kind}`} /><small>{label}</small></motion.div>;
 }
 
 function AddEntry() {
