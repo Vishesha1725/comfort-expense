@@ -1,39 +1,49 @@
-# MoneyQuest Pixel OS — Girl Profile Edition
+# MoneyQuest Pixel OS
 
-A clean pixel-profile finance tracker inspired by grid-paper profile boards.
+A production-ready local-first finance tracker with a clean pixel profile-board aesthetic.
 
-## Included
-- Pixel girl profile board
-- Moving leaves, flowers, pets, and inventory objects
-- Clean Add Entry form
-- Advanced Safe/Day engine
-- Rent, furniture, and WiFi fixed costs
-- Mom Bucket separate from fixed costs
-- WiFi starts from September 2026 by default
-- All numbers editable
-- Risk cards
-- Daily and weekly missions
-- Vault goals
-- Inventory unlocks
-- Finance Terminal
-- Searchable history
-- CSV export
-- Monthly summary download
-- Backup/import
-- Reset current month / reset all
+## Setup
 
-## Default fixed costs
-- Rent: ₹23,000
-- Furniture rent: ₹2,000
-- WiFi: ₹499, active from 2026-09
-- Mom: separate bucket, not fixed by default
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Output directory:
+
+```text
+dist
+```
 
 ## Deploy
-This is a static site.
 
-Cloudflare Pages / Netlify / Vercel:
-- Build command: leave empty
-- Output directory: public
+Cloudflare Pages:
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Netlify:
+- Build command: `npm run build`
+- Publish directory: `dist`
+
+Vercel:
+- Framework preset: Vite
+- Build command: `npm run build`
+- Output directory: `dist`
 
 GitHub Pages:
-- Upload the contents of `public/` or configure Pages to serve from that folder.
+- Run `npm run build`
+- Deploy the generated `dist` folder with your preferred Pages workflow.
+
+## Notes
+
+- Data is stored in browser LocalStorage through Zustand persistence.
+- No backend or paid APIs are required.
+- Default salary/fixed-cost values are editable in Settings.
+- Mom Bucket is separate and excluded from fixed costs unless protected.
+- WiFi only counts from the configured start month.
